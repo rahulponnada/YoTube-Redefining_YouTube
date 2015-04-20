@@ -1,9 +1,12 @@
 # YoTub-Redefining_YouTube
 A new way to seach YouTube by topics (ontological terms) there by enhancing your searching experience.
 </br>
+</br>
 Everyday it is estimated that there are humongous number of videos are being uploaded to youtube. Almost 300 minutes of video is uploaded to youtube per minute. To search a video in this large database is sometimes a tedious. In this project we addressed the problem by using utilizing Freebase API and YouTube data analytics API to rank the videos and narrow down your search results according to topics.
 </br>
+</br>
 Link to a short demo on the project - https://youtu.be/XeDJZRi5YaQ
+</br>
 </br>
 Freebase API has provided us with Ontological terms to narrow down the search results according to the topic selected by the user. YouTube data analytics API has provided the metadata of the video which helped us to rank the video based on certain factors.
 </br>
