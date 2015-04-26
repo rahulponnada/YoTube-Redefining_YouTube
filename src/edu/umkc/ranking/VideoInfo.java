@@ -13,7 +13,14 @@ public class VideoInfo {
 	String likeviewCount;
 	String dislikelikeCount;
 	String viewpercent;
+	String url;
 		
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getLikeviewCount() {
 		return likeviewCount;
 	}

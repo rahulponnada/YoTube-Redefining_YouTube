@@ -1,19 +1,17 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-
 
 
 /**
@@ -38,11 +36,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	/*	// TODO Auto-generated method stub
-		System.out.println("stupid");
+		// TODO Auto-generated method stub
+		System.out.println("stupidkdhskhsk");
 		String emailID = request.getParameter("userName");
 		String pswd = request.getParameter("userPass");
-		System.out.println("Hello World");
+		System.out.println("Hello Worldmnbdshfsbj");
         //if(userName == null || "".equals(userName)){
           //  userName = "Guest";
         //}
@@ -52,19 +50,19 @@ public class LoginServlet extends HttpServlet {
 	//emailID = "anvesh525@gmail.com";
 		//pswd = "anvesh@umkc";
 	
-	BasicDBObject searchusername = new BasicDBObject();
-	dbConnection = new MongoDB();
-	LoginTable = dbConnection.getDb().getCollection("LoginDetails");
-	searchusername.put("emailID", emailID);
+		BasicDBObject searchusername = new BasicDBObject();
+		dbConnection = new MongoDB();
+		LoginTable = dbConnection.getDb().getCollection("LoginDetails");
+		searchusername.put("emailID", emailID);
 	
-	DBCursor cursor = LoginTable.find(searchusername);
-	while (cursor.hasNext()) {
-		System.out.println(cursor.next());
-	}
+		DBCursor cursor = LoginTable.find(searchusername);
+		while (cursor.hasNext()) {
+			System.out.println(cursor.next());
+		}
 	
 	if(cursor.count()== 0){
-		result ="user";
-		System.out.println(result);
+		result ="username hjkhgjgfghfhgf";
+		//System.out.println(result);
 	}
 	else
 	{
@@ -80,11 +78,17 @@ public class LoginServlet extends HttpServlet {
 			BasicDBObject queryuser = new BasicDBObject();
 			queryuser.put("emailID", emailID);
 			
-			BasicDBObject updatelogintime = new BasicDBObject();
+			int tempCount = (int) userobject.get("noOfLogins") ;
+			tempCount++;
+			BasicDBObject updatelogintimeCount = new BasicDBObject();
 			
-			updatelogintime.append("$set", new BasicDBObject().append("lastLogintime",  dateFormat.format(date)));
-			LoginTable.update(queryuser , updatelogintime);
+			updatelogintimeCount.append("$set", new BasicDBObject().append("lastLogintime",  dateFormat.format(date)));
+			LoginTable.update(queryuser , updatelogintimeCount);
 			
+			updatelogintimeCount.append("$set", new BasicDBObject().append("noOfLogins", tempCount));
+			
+			LoginTable.update(queryuser , updatelogintimeCount);
+						
 		}
 		else
 		{
@@ -93,18 +97,14 @@ public class LoginServlet extends HttpServlet {
 		}
 			
 	}
-	dbConnection.fetch("emailID", LoginTable);
+		dbConnection.fetch("emailID", LoginTable);
  
-        System.out.println("Helo1224");
-		response.setContentType("text/plain");
+        response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8"); 
-		System.out.println("Helo12378");
 		System.out.println(result);
 		response.getWriter().write(result);
-		System.out.println(result);
-		
-		System.out.println("Helo1243");*/
-        //System.out.println("requwst"+request.getAttribute("username"));
+		//System.out.println(result);
+		//System.out.println("requwst"+request.getAttribute("username"));
         //request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 	}
 
@@ -113,86 +113,5 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.flushBuffer();
-		response.setContentType("text/plain;charset=UTF-8");
-        response.setHeader("Cache-control", "no-cache, no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "-1");
- 
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.setHeader("Access-Control-Max-Age", "86400");
- 
-        //response.reset();
-        //response.resetBuffer();
-        
-		System.out.println("stupid");
-		String emailID = request.getParameter("userName");
-		String pswd = request.getParameter("userPass");
-		System.out.println("Hello World");
-        //if(userName == null || "".equals(userName)){
-          //  userName = "Guest";
-        //}
-		Date date = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		
-	//emailID = "anvesh525@gmail.com";
-		//pswd = "anvesh@umkc";
-	
-	BasicDBObject searchusername = new BasicDBObject();
-	dbConnection = new MongoDB();
-	LoginTable = dbConnection.getDb().getCollection("LoginDetails");
-	searchusername.put("emailID", emailID);
-	
-	DBCursor cursor = LoginTable.find(searchusername);
-	while (cursor.hasNext()) {
-		System.out.println(cursor.next());
 	}
-	
-	if(cursor.count()== 0){
-		result ="user";
-		System.out.println(result);
-	}
-	else
-	{
-		BasicDBObject password = new BasicDBObject();
-		password.put("password", pswd);
-		DBObject userobject = cursor.curr();
-		
-		System.out.println(userobject.get("password").toString());
-		
-		if( userobject.get("password").toString().equals(pswd)) {
-			result ="success";
-			System.out.println(result);
-			BasicDBObject queryuser = new BasicDBObject();
-			queryuser.put("emailID", emailID);
-			
-			BasicDBObject updatelogintime = new BasicDBObject();
-			
-			updatelogintime.append("$set", new BasicDBObject().append("lastLogintime",  dateFormat.format(date)));
-			LoginTable.update(queryuser , updatelogintime);
-			
-		}
-		else
-		{
-			result ="pass";
-			System.out.println(result);
-		}
-			
-	}
-	dbConnection.fetch("emailID", LoginTable);
- 
-        System.out.println("Helo1224");
-               response.getWriter().write(result);
-        System.out.println("Helo12378");
-		System.out.println(result);
-		//response.getWriter().write(result);
-		System.out.println("dsvhj"+response.getWriter().toString());
-		System.out.println("Helo1243");
-        //System.out.println("requwst"+request.getAttribute("username"));
-        //request.getRequestDispatcher("/welcome.jsp").forward(request, response);
-
-	}
-
 }

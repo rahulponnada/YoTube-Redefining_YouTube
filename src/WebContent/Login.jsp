@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<title>YoTub | Redefining YouTube</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
 <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/grayscale.css" rel="stylesheet">
@@ -22,8 +23,7 @@
 <script type= "text/javascript">
 $(document).ready(function() {
 	if (localStorage.chkbx && localStorage.chkbx != '' && localStorage.chkbx != null) {
-		alert("Hello");
-      	$('#remember_me').attr('checked', 'checked');
+		$('#remember_me').attr('checked', 'checked');
         $('#inputEmail').val(localStorage.usrname);
         $('#inputPassword').val(localStorage.pass);
     } 
@@ -34,7 +34,6 @@ $(document).ready(function() {
 	}
 	$('#remember_me').click(function() {
 		 
-		alert("Hello2"); 
 		if ($('#remember_me').is(':checked')) {
              // save username and password
              localStorage.usrname = $('#inputEmail').val();
@@ -46,65 +45,39 @@ $(document).ready(function() {
              localStorage.chkbx = '';
          }
      });
-	/*$('#login').click(function() {
-		
-		alert("Hello3");
-		var user=$('#inputEmail').val();
-        var pwd=$('#inputPassword').val();
-        $.ajax({
-            type: "POST",
-        	url : "loginServlet",
-        	dataType: "text",
-            data : {"userName" : user,"userPass" : pwd},
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
-            },
-            success : function (data) {
-            	alert("hellololloo");
+	$('#login').click(function() {
+		if(($.trim($('#inputEmail').val()) != null && $.trim($('#inputEmail').val()) != "") && $.trim($('#inputPassword').val()) != null && $.trim($('#inputPassword').val()) != "")
+		{	
+		$.ajax({
+            url : "loginServlet",
+        	data : {"userName" : user=$('#inputEmail').val(),"userPass" : $('#inputPassword').val()},
+            success : function (responseText) {
+            	console.log("hellololloo  "+responseText);
             	//document.location='welcome.jsp?user=satish';
-            	alert(typeof data);
-            	alert(data);
+            	//alert(typeof responseText);
+            	//alert(responseText);
             	//var message = responseText;
-            	if(data=="success"){
-            		alert("Login sucessfull");
-            		document.location='welcome.jsp?user=satish';
+            	if($.trim(responseText)=="success"){
+            		console.log("success");
+            		window.location='homepage.jsp';
             	}            	
-            	else if(data=="user"){
-            		alert("Invalid Username");
+            	else if($.trim(responseText)=="pass"){
+            		console.log("else if");
+            		alert("Invalid Password");
             		//document.location='welcome.jsp?user=satish';
             	}
             	else{
-            		alert("Invalid password");
+            		console.log("else");
+            		alert("Invalid username");
             		//document.location='welcome.jsp?user=satish';
             	}
-            	alert(responseText);
-            	//var message = responseText;
-            	//test(responseText);
-            	//alert("repsosne"+responseText);
-            	//String message = (String)responseText;
-            	//if(message=="invalid password")%>
-            	//var successUrl = "welcome.jsp"; // might be a good idea to return this URL in the successful AJAX call
-    			//window.location.href = 'welcome.jsp?user='+responseText;
-    			//document.location='welcome.jsp?user='+responseText;
-                //$('#ajaxGetUserServletResponse').innerHtml =responseText;
             }
-        });*/
-    });
-	/*function test(responseText){
-		if(responseText=="invalid password"){
-			alert("Invalid Password");
-			//document.location="Login.jsp"
-		}
-		else if(responseText=="invalid username")
-		{
-			alert("Invalid Username");
-			//document,location="Login.jsp"
-		}
+        });}
 		else{
-			document.location="welcome.jsp?user="+responseText;
+			alert("Enter Login detials");
+			
 		}
-	}*/
+    });
 
 });
 
@@ -131,19 +104,19 @@ $(document).ready(function() {
 					</div>
 				  </div>-->
 					
-					<form method="post" action="homepage.jsp" class="form-signin" style="padding-left:500px">
+					<div class="form-signin" style="padding-left:500px">
 					  
 					<table>
 					<tr><td></td><td><p style="padding-left:70px">Please Sign In</p></td><td></td></tr>
 					<tr>
         			<td></td>
-					<td><input type="email" id="inputEmail" style="width:150%" class="form-control" placeholder="Email address" required autofocus ></td>
+					<td><input type="email" id="inputEmail" style="width:150%" class="form-control" placeholder="Email address" autofocus ></td>
 					<td></td>
 					</tr>
 					<tr style="height:10px"></tr>
 										<tr>
 					<td></td>
-					<td><input type="password" id="inputPassword" style="width:150%" class="form-control" placeholder="Password" required></td>
+					<td><input type="password" id="inputPassword" style="width:150%" class="form-control" placeholder="Password"></td>
 					<td></td>
 					</tr>
 					<tr>
@@ -160,10 +133,9 @@ $(document).ready(function() {
 						<tr style="height:10px"></tr>
 						<td></td>
 						<td><div style="text-align:left"><a href="ForgotPassword.jsp?message=welcome">Forgot Password</a></td>
-						<td><div style="text-align:left"><a href="/yotube/recent">Recent Users</a></td>
 						</tr>
 						</table>
-						</form>
+						</div>
 					
 							</div> 
 			</div>

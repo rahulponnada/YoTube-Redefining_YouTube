@@ -1,13 +1,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.umkc.RecentLoginDetails"%>
+<%@ page import="com.umkc.SearchKeywords"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Forgot Password</title>
+<title>YoTub | Redefining YouTube</title>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,30 +29,25 @@
         <div class="intro-body">
 			<div class="row">
 				<div class="col-sm-9" style="padding-left:280px">
-		<p style="padding-left:0px">Most Recent Users</p>  
+		<p style="padding-left:0px">Most Frequent Keywords</p>  
         <table class="table table-striped">
         		<th style="text-align:center; Color:#000">S No</th>
         		
-        		<th style="text-align:center; Color:#000">User Name</th>
+        		<th style="text-align:center; Color:#000">Keyword</th>
         		
-        		<th style="text-align:center; Color:#000">Email ID</th>
+        		<th style="text-align:center; Color:#000">Count</th>
         		
-        		<th style="text-align:center; Color:#000">No Of Logins</th>
-        		
-        		<th style="text-align:center; Color:#000">Last Login</th> 
         		<%
         		//RecentLoginDetails recent = new RecentLoginDetails();
         		int i=1;
-        		List<RecentLoginDetails> recentList = (ArrayList<RecentLoginDetails>)request.getAttribute("List"); 
-        		for(RecentLoginDetails tag:recentList){
+        		List<SearchKeywords> keywordList = (ArrayList<SearchKeywords>)request.getAttribute("List"); 
+        		for(SearchKeywords tag:keywordList){
 				//for(int i=0;i<=10;i++){	
 				//}	%>
          		<tr>  
                     <td><%= i%></td>
-                    <td><%= tag.getName() %></td>
-                    <td><%= tag.getEmailID() %></td>
-                    <td><%= tag.getNoOfLogins() %></td>
-                    <td><%= tag.getLogintime() %></td>
+                    <td><%= tag.getKeyword() %></td>
+                    <td><%= tag.getCount() %></td>
                     
                 </tr>
                 <%i++; } %>     </table>  

@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -16,25 +15,26 @@ import java.util.List;
 
 import com.mongodb.DBCursor;
 import com.umkc.RecentLoginDetails;
+import com.umkc.SearchKeywords;
 
 
 /**
  * Servlet implementation class RecentUsers
  */
-@WebServlet("/RecentUsers")
-public class RecentUsers extends HttpServlet {
+@WebServlet("/FrequentSearchTerms")
+public class FrequentSearchTerms extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static MongoDB dbConnection;
-	private static DBCollection LoginTable;
+	private static DBCollection userHistoryTable;
 	private static String result = "";
-	private static List<RecentLoginDetails> yourList;
+	private static ArrayList<SearchKeywords> yourList;
 	private static BasicDBObject temp;
-	private static RecentLoginDetails detailsStruct;
+	private static SearchKeywords frequentsearches;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecentUsers() {
+    public FrequentSearchTerms() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,15 +44,13 @@ public class RecentUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello World!Hello World!Hellow World!");
 		BasicDBObject searchLatestname = new BasicDBObject();
-		searchLatestname.put("noOfLogins", -1);
-		searchLatestname.put("lastLogintime", -1);
-		
+		searchLatestname.put("count", -1);		
 		dbConnection = new MongoDB();
-		LoginTable = dbConnection.getDb().getCollection("LoginDetails");
+		userHistoryTable = dbConnection.getDb().getCollection("searcHistory");
 				
-		DBCursor cursor = LoginTable.find().sort(searchLatestname).limit(10);
+		DBCursor cursor = userHistoryTable.find().sort(searchLatestname).limit(10);
+		
 		
 		if(cursor.count()== 0){
 			result ="no user deatils in DB";
@@ -62,25 +60,19 @@ public class RecentUsers extends HttpServlet {
 		else
 		{
 			
-			yourList = new ArrayList<RecentLoginDetails>();
+			yourList = new ArrayList<SearchKeywords>();
 			while (cursor.hasNext()) {
 				temp =  (BasicDBObject) cursor.next();
-				String f1 = temp.get("name").toString();
-				String f2 = temp.get("emailID").toString();
-				int f3	=  temp.getInt("noOfLogins");
-				String f4 = temp.get("lastLogintime").toString();			
-				detailsStruct = new  RecentLoginDetails(f1,f2,f3,f4);	
-				yourList.add(detailsStruct);
+				String f1 = temp.get("searchterm").toString();
+				int f2 = temp.getInt("count");		
+				frequentsearches = new  SearchKeywords(f1,f2);	
+				yourList.add(frequentsearches);
+				
 								
 			}
 			
 			request.setAttribute("List",yourList);
-			System.out.println("Nasty Nasty NAsty Nasty NAsty");
-			request.getRequestDispatcher("/recent.jsp").forward(request, response);
-				
-				//for(RecentLoginDetails tag:yourList){
-					//tag.printDeatils();
-				//}			
+			request.getRequestDispatcher("/frequentsearch.jsp").forward(request, response);			
 		}
 	}
 
@@ -89,6 +81,7 @@ public class RecentUsers extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		doGet(request,response);
 	}
 
 }

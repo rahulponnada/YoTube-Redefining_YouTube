@@ -10,7 +10,7 @@
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Brushed | Responsive One Page Template</title>   
+<title>YoTube | Redefining YouTube</title>   
 
 <meta name="description" content="Insert Your Site Description" /> 
 
@@ -101,13 +101,12 @@
         </div>
         <nav id="menu">
             <ul id="menu-nav">
-                <li class="current"><a href="#home-slider">Home</a></li>
-                <li><input type="text" style="height:25px;width:460px"></input></li>
-                <li><button id="search" action="/page" type="button" class="btn btn-danger" style="height:36px; width:130%; text-align:center; padding: 5px 5px 5px 5px; margin-bottom: 8.5px">Ranking</button></li>
-                <li><button id="search1" action="/yotube/recent" type="button" class="btn btn-danger" style="height:36px; width:130%; text-align:center; padding: 5px 5px 5px 5px; margin-bottom: 8.5px">Recent Users</button></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#logout">Logout</a></li>
+                <li class="current"><a href="#" onClick="window.location='/yotube/homepage.jsp'">Home</a></li>
+                <li><input type="text" autofocus id="search" style="height:25px;width:460px"/>
+                <button onClick="search()" type="button" class="btn btn-danger" style="height:36px; width:100px; text-align:center; padding: 5px 5px 5px 5px; margin-bottom: 8.5px" >Ranking</button></li>
+                <li><a href="#" onClick="window.location='/yotube/recent'">Frequent Users</a></li>
+                <li><a href="#" onClick="window.location='/yotube/frequent'">Frequent searches</a></li>
+                <li><a href="#" onClick="window.location='Login.jsp'">Logout</a></li>
             </ul>
         </nav>
         
@@ -116,9 +115,9 @@
 <!-- End Header -->
 
 <!-- Our Work Section -->
-<div id="work" class="page">
+<div id="work" class="homepage">
 	<div class="container">
-           <h2>Welcome to YoTub :) </h2><br>
+           <h2>Welcome to YoTube :) </h2><br>
             <h4>A new way to seach YouTube by categories (ontological terms) there by enhancing your searching experience.</h4>
             <h5>Search results will be ranked according to <i style="color:red">View%, Likes/View%, Dislike/Like%, CommentCount.</i></h5>
             
@@ -163,6 +162,12 @@
 
 
 <!-- Js -->
+<script>
+function search(){
+	var query= document.getElementById("search").value;
+	window.location = '/yotube/searchpage?query='+query;
+}
+</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!-- jQuery Core -->
 <script src="_include/js/bootstrap.min.js"></script> <!-- Bootstrap -->
 <script src="_include/js/supersized.3.2.7.min.js"></script> <!-- Slider -->
@@ -174,7 +179,6 @@
 <script src="_include/js/jquery.tweet.js"></script> <!-- Tweet -->
 <script src="_include/js/plugins.js"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
 <script src="_include/js/main.js"></script> <!-- Default JS -->
-<script src="_include/js/search.js"></script> 
 <!-- End Js -->
 
 </body>

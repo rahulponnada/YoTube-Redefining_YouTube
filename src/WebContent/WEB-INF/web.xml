@@ -3,15 +3,15 @@
   <display-name>yotub</display-name>
   <servlet>
     <servlet-name>resultspage</servlet-name>
-    <servlet-class>com.ibm.cloudoe.samples.HelloResource</servlet-class>
+    <servlet-class>edu.umkc.servlet.FetchVideos</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>resultspage</servlet-name>
-    <url-pattern>/page</url-pattern>
+    <url-pattern>/searchpage</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>homepage</servlet-name>
-    <servlet-class>com.ibm.cloudoe.samples.SearchResults</servlet-class>
+    <servlet-class>edu.umkc.servlet.SearchResults</servlet-class>
     </servlet>
   <servlet-mapping>
     <servlet-name>homepage</servlet-name>
@@ -34,6 +34,15 @@
     <servlet-mapping>  
         <servlet-name>pass</servlet-name>  
         <url-pattern>/pass</url-pattern>  
+    </servlet-mapping>
+    <servlet>  
+        <servlet-name>frequent</servlet-name>  
+        <servlet-class>FrequentSearchTerms</servlet-class>  
+    </servlet>  
+  
+    <servlet-mapping>  
+        <servlet-name>frequent</servlet-name>  
+        <url-pattern>/frequent</url-pattern>  
     </servlet-mapping>
     <servlet>  
         <servlet-name>recent</servlet-name>  

@@ -3,12 +3,14 @@ package com.umkc;
 public class RecentLoginDetails {
 	private String name ;
 	private String emailID;
+	private int noOfLogins;
 	private String Logintime;
 	
-	public RecentLoginDetails(String name, String emailID, String Logintime )
+	public RecentLoginDetails(String name, String emailID, int noOfLogins, String Logintime )
 	{
 		this.name = name ;
 		this.emailID = emailID;
+		this.noOfLogins = noOfLogins;
 		this.Logintime = Logintime;
 	}
 	public String getName()
@@ -20,6 +22,12 @@ public class RecentLoginDetails {
 	{
 		return emailID;
 	}
+	
+	public int getNoOfLogins()
+	{
+		return noOfLogins;
+	}
+	
 	public String getLogintime()
 	{
 		return Logintime;
